@@ -102,19 +102,18 @@ extension ImageEditorPlugin: PhotoEditorDelegate {
 
 extension ImageEditorPlugin: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-     func imagePickerController(_ picker: UIImagePickerController,
-                                       didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
-        guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {
-            picker.dismiss(animated: true, completion: nil)
-            return
-        }
-        picker.dismiss(animated: true, completion: nil)
-        
-        
-        self.presentImageEditorViewController(image: image);
-    }
-    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+           guard let image = info[UIImagePickerControllerEditedImage] as? UIImage  else {
+               picker.dismiss(animated: true, completion: nil)
+               return
+           }
+           picker.dismiss(animated: true, completion: nil)
+           
+           
+           self.presentImageEditorViewController(image: image);
+      
+           }
+     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         self.viewController.dismiss(animated: true, completion: nil)
     }
@@ -124,7 +123,7 @@ extension UIImage {
     
     public func toBase64() -> String? {
         let imageData: Data?
-        imageData = self.jpegData(compressionQuality: 1)//compression
+        imageData = UIImageJPEGRepresentation(self, 1)//compression
         return imageData?.base64EncodedString()
     }
 }
