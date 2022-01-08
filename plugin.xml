@@ -19,7 +19,7 @@
         <podspec>
             <config>
                 <source url="https://github.com/brightcove/BrightcoveSpecs.git" />
-                <source url="https://github.com/CocoaPods/Specs.git"/>
+                <source url="https://cdn.cocoapods.org"/>
                 <source url="https://github.com/eventtus/photo-editor.git" />
             </config>
             <pods use-frameworks="true">
